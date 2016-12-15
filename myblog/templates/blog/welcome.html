@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- Angular文件-->
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <style type="text/css">
+    *{margin:0;padding:0;font-size:14px;}
+    .normBox {
+        color: #5E5E5E;
+        width: 950px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 48px;
+    }
+    .listBox {
+        width: 278px;
+        border-top-width: 2px;
+        border-top-style: solid;
+        border-top-color: #1d8dcd;
+        background-color: #fafafa;
+    }
+    .fltlft {
+	    float: left;
+    }
+    .ml57 {
+        margin-left: 58px;
+    }
+    .textCenter {
+        text-align: center;
+    }
+    .listBox .listItem  {
+        font-size: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        transition: background-color .15s;
+        -webkit-transition: background-color .15s;
+    }
+    .listBox .listTitle {
+        font-size: 20px;
+        padding-top: 10px;
+        padding-bottom: 12px;
+    }
+    .clearfloat {
+        clear:both;
+        height:0;
+        font-size: 1px;
+        line-height: 0px;
+    }
+    .varea {
+        width: 950px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .footer {
+        position: absolute;
+        background-color: #f9f9f9;
+        z-index: 1000;
+        width: 100%;
+        bottom: 0;
+        border-top-width: 2px;
+        border-top-style: solid;
+        border-top-color: #eeeeee;
+    }
+    .bg1 {
+        background-color: #f9f9f9;
+    }
+    .enFont {
+        font-family: Arial, Helvetica, Simsun, STHeiti;
+    }
+    .copyright {
+        font-size: 14px;
+        color: #5e5e5e;
+        padding-top: 23px;
+    }
+    .fltrt {
+        float: right;
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header navbar-left" style="width: auto; min-width:25%">
+                <a class="navbar-brand" href="#">TANGBLOG</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-left">
+                    <li style="width: 100px; text-align: center;"class="active"><a href="#">Home</a></li>
+                    <li style="width: 100px; text-align: center;"class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Python
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Python2.7</a></li>
+                            <li><a href="#">Python3.x</a></li>
+                        </ul>
+                    </li>
+                    <li style="width: 100px; text-align: center;"class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            System
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">CentOS 6.7</a></li>
+                            <li><a href="#">Windows</a></li>
+                        </ul>
+                    </li>
+                    <li style="width: 100px; text-align: center;"class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                           SQL
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">MySQL</a></li>
+                            <li><a href="#">Redis</a></li>
+                        </ul>
+                    </li>
+                    <li style="width: 100px; text-align: center;"class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            WEB
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">HTML</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">BootStrap</a></li>
+                            <li class="divider"></li>
+                                <li><a href="#">Web.py</a></li>
+                                <li><a href="#">Flask</a></li>
+                                <li><a href="#">Tornado</a></li>
+                                <li><a href="#">Django</a></li>
+                        </ul>
+                    </li>
+                    <li style="width: 120px; text-align: center;"class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Other tools
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Gunicorn</a></li>
+                            <li><a href="#">Nginx</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div> {% block wel_text %}
+    {% endblock %}</div>
+    <div>{% block container %}
+	{% endblock %}
+    </div>
+    {% block blog_text %}
+    {% endblock %}
+    <div class="footer bg1">
+	<div class="varea">
+		<div class="copyright enFont fltrt">
+			<span>Designed by <b><i>Tangxl</i></b> | Copyright 2016 - 2016 <b><i>TANGXUELIN</i> Project</b></span>
+		</div>
+		<div class="clearfloat"></div>
+	</div>
+</div>
+</body>
+</html>
