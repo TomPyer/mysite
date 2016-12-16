@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/', index),
     url(r'^python/(.+)/$', get_blog),
-    url( r'^static/(?P<path>.*)$', serve,{ 'document_root': settings.STATIC_URL }),
+    url(r'^static/(?P<path>.*)$', serve,{ 'document_root': settings.STATIC_URL }),
+    url(r'^add_blog/$', add_blog)
 ]
