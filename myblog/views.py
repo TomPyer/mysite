@@ -7,4 +7,8 @@ from django.http import Http404
 
 
 def index(request):
-    return render_to_response('home_body.html')
+        return render_to_response('home_body.html')
+
+
+def get_blog(request, blog_type):
+    return render_to_response('%s.html'%blog_type)

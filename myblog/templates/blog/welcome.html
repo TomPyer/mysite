@@ -18,6 +18,16 @@
     <!-- Angular文件-->
     <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <!-- include summernote css/js-->
+    <link href="/myblog/static/summernote-develop/dist/summernote.css" rel="stylesheet">
+    <script src="/myblog/static/summernote-develop/dist/summernote.js"></script>
+    <!--国际化 -->
+    <script src="/myblog/static/summernote-develop/lang/summernote-zh-CN.js"></script>
+    <link href="http://cdn.gbtags.com/twitter-bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="http://cdn.gbtags.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://cdn.gbtags.com/summernote/0.5.2/summernote.css" rel="stylesheet" type="text/css"/>
+
     <style type="text/css">
     *{margin:0;padding:0;font-size:14px;}
     .normBox {
@@ -33,6 +43,14 @@
         border-top-style: solid;
         border-top-color: #1d8dcd;
         background-color: #fafafa;
+    }
+    .blogListBox {
+        width: 278px;
+        border-left-width: 2px;
+        border-left-style: solid;
+        border-left-color: #1d8dcd;
+        background-color: #fafafa;
+        margin-left: 150px;
     }
     .fltlft {
 	    float: left;
@@ -90,6 +108,9 @@
     .fltrt {
         float: right;
     }
+    .blogHeight{
+        height: 300px;
+    }
 </style>
 </head>
 <body>
@@ -100,14 +121,14 @@
             </div>
             <div>
                 <ul class="nav navbar-nav navbar-left">
-                    <li style="width: 100px; text-align: center;"class="active"><a href="#">Home</a></li>
+                    <li style="width: 100px; text-align: center;"class="dropdown"><a href="/blog/index">Home</a></li>
                     <li style="width: 100px; text-align: center;"class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Python
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Python2.7</a></li>
+                            <li><a href="/blog/python/python_2">Python2.7</a></li>
                             <li><a href="#">Python3.x</a></li>
                         </ul>
                     </li>
@@ -170,6 +191,7 @@
             </div>
         </div>
     </nav>
+
     <div> {% block wel_text %}
     {% endblock %}</div>
     <div>{% block container %}
@@ -177,13 +199,57 @@
     </div>
     {% block blog_text %}
     {% endblock %}
-    <div class="footer bg1">
-	<div class="varea">
-		<div class="copyright enFont fltrt">
-			<span>Designed by <b><i>Tangxl</i></b> | Copyright 2016 - 2016 <b><i>TANGXUELIN</i> Project</b></span>
-		</div>
-		<div class="clearfloat"></div>
-	</div>
-</div>
+    <div class="footer bg1"></div>
+
+    <div id="summernote"></div>
 </body>
+
+<script>
+    $(document).ready(function () {
+        //初始化文本框编辑器
+        $("#summernote").summernote({
+            height: 200,
+            callbacks: {
+                onImageUpload: function (files) {
+                    sendFile(files[0], this);
+                }
+            }
+        });
+
+    });
+    function sendFile(file, el) {
+        var formData = new FormData();
+        formData.append("photo", file);
+        var fileData = URL.createObjectURL(file);
+        $(el).summernote('insertImage', fileData, function ($image) {
+            $.ajax({
+                url: "/Account/UploadFile",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "text",
+                type: 'POST',
+                success: function (url) {
+                    if (url == "") {
+                        $image.attr('src', "");
+
+                    } else {
+                        $image.attr('src', url);
+                    }
+                }
+            });
+        });
+    }
+</script>
+
 </html>
+<!--
+<script>
+    $(document).ready(function() {
+      $('#editor').summernote({
+        lang: 'zh-CN' // default: 'en-US'
+      });
+    });
+</script>
+-->
