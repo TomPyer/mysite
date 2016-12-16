@@ -20,10 +20,10 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <!-- include summernote css/js-->
-    <link href="/myblog/static/summernote-develop/dist/summernote.css" rel="stylesheet">
-    <script src="/myblog/static/summernote-develop/dist/summernote.js"></script>
+    <link href="/static/summernote-develop/dist/summernote.css" rel="stylesheet">
+    <script src="/static/summernote-develop/dist/summernote.js"></script>
     <!--国际化 -->
-    <script src="/myblog/static/summernote-develop/lang/summernote-zh-CN.js"></script>
+    <script src="/static/summernote-develop/lang/summernote-zh-CN.js"></script>
     <link href="http://cdn.gbtags.com/twitter-bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="http://cdn.gbtags.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://cdn.gbtags.com/summernote/0.5.2/summernote.css" rel="stylesheet" type="text/css"/>
@@ -209,11 +209,16 @@
         //初始化文本框编辑器
         $("#summernote").summernote({
             height: 200,
+            width: 400,
+            lang: 'zh-CN',
             callbacks: {
                 onImageUpload: function (files) {
                     sendFile(files[0], this);
                 }
-            }
+            },
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true,                 // set focus to editable area after initializing summernote});
         });
 
     });
