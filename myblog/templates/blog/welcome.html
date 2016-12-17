@@ -30,12 +30,21 @@
 
     <style type="text/css">
     *{margin:0;padding:0;font-size:14px;}
+    .dh{
+      position: absolute;
+      top: 500px;
+      right:50px;
+      z-index:999;
+    }
     .normBox {
         color: #5E5E5E;
         width: 950px;
         margin-right: auto;
         margin-left: auto;
         margin-top: 48px;
+    }
+    .a{
+        color: #098ddf;
     }
     .listBox {
         width: 278px;
@@ -49,6 +58,7 @@
         border-left-width: 2px;
         border-left-style: solid;
         border-left-color: #1d8dcd;
+        border-right: solid 2px #1d8dcd;
         background-color: #fafafa;
         margin-left: 150px;
     }
@@ -199,12 +209,22 @@
     </div>
     {% block blog_text %}
     {% endblock %}
+    {% block text_edit %}
+    {% endblock %}
+    {% block blog_info %}
+    {% endblock %}
+    <div class="dh">
+        <ul style="list-style: none;">
+            <li ><a href="/admin"><b>管理登录</b></a></li>
+            <li ><a href="/blog/add_blog"><b>博文编辑</b></a></li>
+            <li ><a><b>联系站长</b></a></li>
+            <li ><a href="#top"><b>返回顶部</b></a></li>
+            <li ><a href="/blog/index"><b>返回首页</b></a></li>
+        </ul>
+    </div>
+
     <div class="footer bg1"></div>
 
-    <!--
-    <div id="summernote"></div>
-    <button onclick="submit_blog_text()">Submit</button>
-    -->
 </body>
 <script>
     function submit_blog_text(){
@@ -216,8 +236,8 @@
     $(document).ready(function () {
         //初始化文本框编辑器
         $("#summernote").summernote({
-            height: 200,
-            width: 400,
+            height: 250,
+            width: 800,
             lang: 'zh-CN',
             callbacks: {
                 onImageUpload: function (files) {
@@ -254,6 +274,43 @@
             });
         });
     };
+    $('#myAffix').affix({
+      offset: {
+        top: 100,
+        bottom: function () {
+          return (this.bottom = $('.footer').outerHeight(true))
+        }
+      }
+    })
+
+</script>
+<script>
+    function show(box) {
+       // var box = document.getElementById("box");
+        var text = box.innerHTML;
+        var newBox = document.createElement("div");
+        var btn = document.createElement("a");
+        newBox.innerHTML = text.substring(0, 200);
+        btn.innerHTML = text.length > 200 ? "...显示全部" : "";
+        btn.href = "###";
+        btn.onclick = function () {
+            if (btn.innerHTML == "...显示全部") {
+                btn.innerHTML = "收起";
+                newBox.innerHTML = text;
+            } else {
+                btn.innerHTML = "...显示全部";
+                newBox.innerHTML = text.substring(0, 200);
+            }
+            return false;
+        }
+        box.innerHTML = "";
+        box.appendChild(newBox);
+        box.appendChild(btn);
+    }
+    var divs = document.getElementsByTagName('div')
+    for (var i = 0; i < divs.length; i++) {
+        if (divs[i].className == 'box') show(divs[i]);
+    }
 </script>
 </html>
 <!--

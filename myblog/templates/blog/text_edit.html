@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="http://cdn.gbtags.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.gbtags.com/twitter-bootstrap/3.2.0/js/bootstrap.js"></script>
-    <script src="http://cdn.gbtags.com/summernote/0.5.2/summernote.min.js"></script>
-    <!-- include summernote css/js-->
-    <link href="/summernote-develop/dist/summernote.css" rel="stylesheet">
-    <script src="/summernote-develop/dist/summernote.js"></script>
-    <!--国际化 -->
-    <script src="/summernote-develop/lang/summernote-zh-CN.js"></script>
-    <link href="http://cdn.gbtags.com/twitter-bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="http://cdn.gbtags.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://cdn.gbtags.com/summernote/0.5.2/summernote.css" rel="stylesheet" type="text/css"/>
+{% extends "blog/welcome.html" %}
+{% load staticfiles %}
 
-</head>
-<body>
-    <div id="editor"></div>
-</body>
-<script>
-$(document).ready(function() {
-  $('#editor').summernote({
-    lang: 'zh-CN' // default: 'en-US'
-  });
-});
-</script>
-</html>
+{% block text_edit %}
+    <div style="margin:160px 200px;">
+        <div id="summernote"></div>
+        <div style="border-left-style: solid; border-left-color:dodgerblue; border-left-width: 3px; float: left">
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;请先选择文章标签:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary">技术分享</button>
+            <button type="button" class="btn btn-info">学习笔记</button>
+            <button type="button" class="btn btn-warning">个人项目</button>
+            <button type="button" class="btn btn-success">生活随笔</button>
+            <div class="dropdown">
+                <b>&nbsp;&nbsp;&nbsp;&nbsp;请选择文章类别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                <b>分类</b>
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      {% for i in cata_list %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{ i.name }}</a></li>
+                      {% endfor %}
+                </ul>
+            </div>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;确认后请点击提:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+            <button type="button" class="btn btn-default" onclick="submit_blog_text()"><b>提交</b></button>
+        </div>
+    </div>
+{% endblock %}

@@ -20,5 +20,6 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/', include('myblog.urls'))
+    url(r'^blog/', include('myblog.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]

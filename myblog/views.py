@@ -50,10 +50,19 @@ def get_blog_list(request):
     for i in blog:
         i.catagory = blog_type
         blog_list.append(i)
+        clolor = '#1d8dcd'
     return render(request, 'blog_body.html', {'blog_list':blog_list})
 
 
 def add_blog(request):
-    print request.GET.get('blog')
-    print type(request.GET.get('blog'))
-    return render_to_response('home_body.html')
+    if request.GET.get('blog'):
+        print request.GET.get('blog')
+    cata_list = Catagory.objects.all()
+    for i in cata_list:
+        print i
+    return render(request,'text_edit.html', {'cata_list': cata_list})
+
+def get_blog(request):
+    blog_id = request.GET.get('id')
+    blog_info = Blog.objects.get(id=blog_id)
+    return render(request, 'blog_info.html', {'blog':blog_info})
