@@ -48,8 +48,9 @@ def get_blog_list(request):
     blog_type = Catagory.objects.get(id=cata_id)
     blog = Blog.objects.filter(catagory=cata_id).all()
     for i in blog:
+        i.catagory = blog_type
         blog_list.append(i)
-    return render(request, '%s.html'%blog_type, {'blog_list':blog_list})
+    return render(request, 'blog_body.html', {'blog_list':blog_list})
 
 
 def add_blog(request):
