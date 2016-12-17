@@ -7,18 +7,10 @@
     <div class="blogListBox" style="float:left;">
         <h4 style="text-align: center">Blog List</h4>
         <ul class="list-group">
-          <li class="list-group-item">
-            <span class="badge">14</span>
-            Cras justo odio
-          </li>
-            <li class="list-group-item">
-            <span class="badge">14</span>
-            Cras justo odio
-            </li>
-            <li class="list-group-item">
-            <span class="badge">14</span>
-            Cras justo odio
-          </li>
+            {% for i in blog_list %}
+              <li class="list-group-item">{{ i.title }}<span class="badge">{{ i.chick }}</span>
+              </li>
+            {% endfor %}
         </ul>
     </div>
     <div style="width:700px; height:auto;float:left;">

@@ -35,6 +35,7 @@ class Blog(models.Model):
     created = models.DateTimeField('发布时间',auto_now_add=True)
     catagory = models.ForeignKey(Catagory,verbose_name='分类')
     tags = models.ManyToManyField(Tag,verbose_name='标签')
+    chick = models.IntegerField('点击数', default=0)
 
     def __unicode__(self):
         return self.title

@@ -1,20 +1,55 @@
+# coding:utf8
 from django.shortcuts import render, render_to_response
 
 # Create your views here.
 from myblog.models import *
 from myblog.forms import CommentForm
 from django.http import Http404
-from myblog.models import Blog
+from myblog.models import Blog, Catagory
+
+import datetime
 
 
 def index(request):
+    """
+    初始界面,
+    显示各分类排行 Category ranking,
+    最近更新 Recent update,
+    热门文章 Hot articles,
+    """
+    # get Category ranking
+    catagory_ranking = []
+    cata = Catagory.objects.all()
+    count = 0
+    for i in cata:
+        a = Blog.objects.filter(catagory=i).count()
+        i.name = str(i)
+        if int(a) != 0:
+            i.count = a
+            catagory_ranking.append(i)
+    catagory_ranking.sort(reverse=True)
+    # get Recent update
+    recent_update = []
+    a = Blog.objects.order_by("-created")[0:5]
+    for i in a :
+        recent_update.append(i)
+        recent_update.sort(reverse=True)
+    # get Hot articles
+    hot_articles = []
+    b = Blog.objects.order_by("-chick")[0:5]
+    for i in b :
+        hot_articles.append(i)
+    return render(request,'home_body.html',{'cata_list' : catagory_ranking[0:5], 'recent_list': recent_update, 'hot_list': hot_articles})
 
-    return render_to_response('home_body.html')
 
-
-def get_blog(request, blog_type):
-    Blog.objects.get(Catagory=blog_type)
-    return render_to_response('%s.html'%blog_type)
+def get_blog_list(request):
+    blog_list = []
+    cata_id = request.GET.get('catagoryid')
+    blog_type = Catagory.objects.get(id=cata_id)
+    blog = Blog.objects.filter(catagory=cata_id).all()
+    for i in blog:
+        blog_list.append(i)
+    return render(request, '%s.html'%blog_type, {'blog_list':blog_list})
 
 
 def add_blog(request):

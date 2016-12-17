@@ -13,19 +13,25 @@
 		<div class="listBox fltlft">
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Category ranking</li>
-					<a href="#"><li class="listItem textCenter">.adj</li></a>
+                {% for cata in cata_list %}
+                    <a href="#"><li class="listItem textCenter">{{ cata.name }}({{ cata.count }})</li></a>
+                {% endfor %}
 			</ul>
 		</div>
 		<div class="listBox fltlft ml57">
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Recent update</li>
-				<a href="#"><li class="listItem textCenter">.adj</li></a>
+				{% for rece in recent_list %}
+                    <a href="#"><li class="listItem textCenter">{{ rece.title }}</li></a>
+                {% endfor %}
 			</ul>
 		</div>
 		<div class="listBox fltlft ml57">
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Hot articles</li>
-				<a href="#"><li class="listItem textCenter">.adj</li></a>
+				{% for hot in hot_list %}
+                    <a href="#"><li class="listItem textCenter">{{ hot.title }}</li></a>
+                {% endfor %}
 			</ul>
 		</div>
 		<div class="clearfloat"></div>
