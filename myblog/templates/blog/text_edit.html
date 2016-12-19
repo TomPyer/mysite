@@ -2,23 +2,23 @@
 {% load staticfiles %}
 
 {% block text_edit %}
-    <div style="margin:160px 200px;">
+    <div style="width:800px;height: 22px;margin-top: 90px; margin-left: 200px; margin-right: 200px;"><input type="text" class="form-control" id="title" placeholder="请输入文章标题"></div>
+    <div style="margin:20px 200px;">
         <div id="summernote"></div>
         <div style="border-left-style: solid; border-left-color:dodgerblue; border-left-width: 3px; float: left">
             <b>&nbsp;&nbsp;&nbsp;&nbsp;请先选择文章标签:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-primary">技术分享</button>
-            <button type="button" class="btn btn-info">学习笔记</button>
-            <button type="button" class="btn btn-warning">个人项目</button>
-            <button type="button" class="btn btn-success">生活随笔</button>
+            <button type="button" id="skill" class="btn btn-default" onclick="select_blog_tags(this)">技术分享</button>
+            <button type="button" id="study"class="btn btn-default" onclick="select_blog_tags(this)">学习笔记</button>
+            <button type="button" id="sepro"class="btn btn-default" onclick="select_blog_tags(this)">个人项目</button>
+            <button type="button" id="life"class="btn btn-default" onclick="select_blog_tags(this)">生活随笔</button>
             <div class="dropdown">
                 <b>&nbsp;&nbsp;&nbsp;&nbsp;请选择文章类别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                <b>分类</b>
+                <b><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">分类</b>
                 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                       {% for i in cata_list %}
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{ i.name }}</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" type="button" onclick="select_blog_catagory(this)">{{ i.name }}</a></li>
                       {% endfor %}
                 </ul>
             </div>
@@ -26,4 +26,35 @@
             <button type="button" class="btn btn-default" onclick="submit_blog_text()"><b>提交</b></button>
         </div>
     </div>
+    <script type="text/javascript">
+        function select_blog_tags(e){
+            e.className = "btn btn-success";
+            var btn_id_list = {"skill":'1',"study":'1', "sepro":'1', "life":'1'};
+            for (x in btn_id_list){
+                cname = document.getElementById(x);
+                if(cname.id != e.id){
+                    cname.className = "btn btn-default";
+                }
+            }
+        }
+        function submit_blog_text(){
+            var sHTML = $('#summernote').summernote('code');
+            var btn_id_list = {"skill":'1',"study":'1', "sepro":'1', "life":'1'};
+            for (x in btn_id_list){
+                now_btn = document.getElementById(x);
+                if (now_btn.className = 'btn btn-success'){
+                    var text_tag = now_btn.id
+                }
+            }
+            catagory_obj = document.getElementById("dropdownMenu1");
+            var text_catagory = catagory_obj.innerHTML;
+            var title = document.getElementById("title").value;
+            window.location.href='http://127.0.0.1:8000/blog/add_blog/?tag='+text_tag+'&catagory='+text_catagory +'&title='+ title + '&blog='+sHTML;
+        }
+        function select_blog_catagory(e){
+            var  now_catagory = e.innerHTML;
+            display_catagory = document.getElementById("dropdownMenu1");
+            display_catagory.innerHTML = now_catagory;
+        }
+    </script>
 {% endblock %}

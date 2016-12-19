@@ -19,7 +19,7 @@ class Tag(models.Model):
     """
     博客标签
     """
-    name = models.CharField('名称',max_length=16)
+    name = models.CharField('名称',max_length=72)
 
     def __unicode__(self):
         return self.name
@@ -34,7 +34,7 @@ class Blog(models.Model):
     content = models.TextField('博客正文')
     created = models.DateTimeField('发布时间',auto_now_add=True)
     catagory = models.ForeignKey(Catagory,verbose_name='分类')
-    tags = models.ManyToManyField(Tag,verbose_name='标签')
+    tag = models.ForeignKey(Tag,verbose_name='标签')
     chick = models.IntegerField('点击数', default=0)
 
     def __unicode__(self):

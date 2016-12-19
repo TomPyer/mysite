@@ -55,12 +55,20 @@ def get_blog_list(request):
 
 
 def add_blog(request):
-    if request.GET.get('blog'):
-        print request.GET.get('blog')
-    cata_list = Catagory.objects.all()
-    for i in cata_list:
-        print i
-    return render(request,'text_edit.html', {'cata_list': cata_list})
+    catagory_list = Catagory.objects.all()
+    dic_tag = {'life':1, 'sepro':2, 'study':3, 'skill':4}
+    if request.GET.get('tag') is not None:
+        blog_obj = request.GET
+        tag_id = dic_tag[blog_obj.get('tag')]
+        cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
+        b = Blog(title= blog_obj.get('title'),
+                 author='tangxuelin',
+                 content=blog_obj.get('blog'),
+                 created=datetime.datetime.now(),
+                 catagory_id=cata_id,
+                 tag_id=int(tag_id))
+        b.save()
+    return render(request,'text_edit.html', {'cata_list': catagory_list})
 
 def get_blog(request):
     blog_id = request.GET.get('id')
