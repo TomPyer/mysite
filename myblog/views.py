@@ -50,7 +50,6 @@ def get_blog_list(request):
     for i in blog:
         i.catagory = blog_type
         blog_list.append(i)
-        clolor = '#1d8dcd'
     return render(request, 'blog_body.html', {'blog_list':blog_list})
 
 
@@ -61,11 +60,12 @@ def add_blog(request):
         blog_obj = request.GET
         tag_id = dic_tag[blog_obj.get('tag')]
         cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
+        print cata_id.id, type(cata_id)
         b = Blog(title= blog_obj.get('title'),
                  author='tangxuelin',
                  content=blog_obj.get('blog'),
                  created=datetime.datetime.now(),
-                 catagory_id=cata_id,
+                 catagory_id=cata_id.id,
                  tag_id=int(tag_id))
         b.save()
     return render(request,'text_edit.html', {'cata_list': catagory_list})

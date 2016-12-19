@@ -142,8 +142,8 @@
                             <b>Python</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog/python/?catagoryid=1"><b>Python2.7</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=2"><b>Python3.x</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=3"><b>Python2.7</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=4"><b>Python3.x</b></a></li>
                         </ul>
                     </li>
                     <li style="width: 100px; text-align: center;"class="dropdown">
@@ -151,8 +151,8 @@
                             <b>System</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog/python/?catagoryid=3"><b>CentOS 6.7</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=4"><b>Windows</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=5"><b>CentOS 6.7</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=6"><b>Windows</b></a></li>
                         </ul>
                     </li>
                     <li style="width: 100px; text-align: center;"class="dropdown">
@@ -160,8 +160,8 @@
                             <b>SQL</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog/python/?catagoryid=5"><b>MySQL</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=6"><b>Redis</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=7"><b>MySQL</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=8"><b>Redis</b></a></li>
                         </ul>
                     </li>
                     <li style="width: 100px; text-align: center;"class="dropdown">
@@ -169,15 +169,15 @@
                             <b>WEB</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog/python/?catagoryid=7"><b>HTML</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=8"><b>CSS</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=9"><b>JavaScript</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=10"><b>BootStrap</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=9"><b>HTML</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=10"><b>CSS</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=11"><b>JavaScript</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=12"><b>BootStrap</b></a></li>
                             <li class="divider"></li>
-                                <li><a href="/blog/python/?catagoryid=11"><b>Web.py</b></a></li>
-                                <li><a href="/blog/python/?catagoryid=12"><b>Flask</b></a></li>
-                                <li><a href="/blog/python/?catagoryid=13"><b>Tornado</b></a></li>
-                                <li><a href="/blog/python/?catagoryid=14"><b>Django</b></a></li>
+                                <li><a href="/blog/python/?catagoryid=13"><b>Web.py</b></a></li>
+                                <li><a href="/blog/python/?catagoryid=14"><b>Flask</b></a></li>
+                                <li><a href="/blog/python/?catagoryid=15"><b>Tornado</b></a></li>
+                                <li><a href="/blog/python/?catagoryid=16"><b>Django</b></a></li>
                         </ul>
                     </li>
                     <li style="width: 120px; text-align: center;"class="dropdown">
@@ -185,8 +185,8 @@
                             <b>Other tools</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/blog/python/?catagoryid=15"><b>Gunicorn</b></a></li>
-                            <li><a href="/blog/python/?catagoryid=16"><b>Nginx</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=17"><b>Gunicorn</b></a></li>
+                            <li><a href="/blog/python/?catagoryid=18"><b>Nginx</b></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -231,8 +231,8 @@
     $(document).ready(function () {
         //初始化文本框编辑器
         $("#summernote").summernote({
-            height: 250,
-            width: 800,
+            height: 280,
+            width: 850,
             lang: 'zh-CN',
             callbacks: {
                 onImageUpload: function (files) {
@@ -268,7 +268,7 @@
                 }
             });
         });
-    };
+    }
     $('#myAffix').affix({
       offset: {
         top: 100,
@@ -297,12 +297,12 @@
                 newBox.innerHTML = text.substring(0, 200);
             }
             return false;
-        }
+        };
         box.innerHTML = "";
         box.appendChild(newBox);
         box.appendChild(btn);
     }
-    var divs = document.getElementsByTagName('div')
+    var divs = document.getElementsByTagName('div');
     for (var i = 0; i < divs.length; i++) {
         if (divs[i].className == 'box') show(divs[i]);
     }
