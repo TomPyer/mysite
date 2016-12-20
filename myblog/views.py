@@ -10,67 +10,70 @@ from myblog.models import Blog, Catagory
 import datetime
 
 
-def index(request):
-    """
-    初始界面,
-    显示各分类排行 Category ranking,
-    最近更新 Recent update,
-    热门文章 Hot articles,
-    """
-    # get Category ranking
-    catagory_ranking = []
-    cata = Catagory.objects.all()
-    count = 0
-    for i in cata:
-        a = Blog.objects.filter(catagory=i).count()
-        i.name = str(i)
-        if int(a) != 0:
-            i.count = a
-            catagory_ranking.append(i)
-    catagory_ranking.sort(reverse=True)
-    # get Recent update
-    recent_update = []
-    a = Blog.objects.order_by("-created")[0:5]
-    for i in a :
-        recent_update.append(i)
-        recent_update.sort(reverse=True)
-    # get Hot articles
-    hot_articles = []
-    b = Blog.objects.order_by("-chick")[0:5]
-    for i in b :
-        hot_articles.append(i)
-    return render(request,'home_body.html',{'cata_list' : catagory_ranking[0:5], 'recent_list': recent_update, 'hot_list': hot_articles})
+class view_cla(object):
+    def __init__(self):
+        pass
 
+    def index(self, request):
+        """
+        初始界面,
+        显示各分类排行 Category ranking,
+        最近更新 Recent update,
+        热门文章 Hot articles,
+        """
+        # get Category ranking
+        catagory_ranking = []
+        cata = Catagory.objects.all()
+        count = 0
+        for i in cata:
+            a = Blog.objects.filter(catagory=i).count()
+            i.name = str(i)
+            if int(a) != 0:
+                i.count = a
+                catagory_ranking.append(i)
+        catagory_ranking.sort(reverse=True)
+        # get Recent update
+        recent_update = []
+        a = Blog.objects.order_by("-created")[0:5]
+        for i in a :
+            recent_update.append(i)
+            recent_update.sort(reverse=True)
+        # get Hot articles
+        hot_articles = []
+        b = Blog.objects.order_by("-chick")[0:5]
+        for i in b :
+            hot_articles.append(i)
+        return render(request,'home_body.html',{'cata_list' : catagory_ranking[0:5], 'recent_list': recent_update, 'hot_list': hot_articles})
 
-def get_blog_list(request):
-    blog_list = []
-    cata_id = request.GET.get('catagoryid')
-    blog_type = Catagory.objects.get(id=cata_id)
-    blog = Blog.objects.filter(catagory=cata_id).all()
-    for i in blog:
-        i.catagory = blog_type
-        blog_list.append(i)
-    return render(request, 'blog_body.html', {'blog_list':blog_list})
+    def get_blog_list(self, request):
+        blog_list = []
+        cata_id = request.GET.get('catagoryid')
+        blog_type = Catagory.objects.get(id=cata_id)
+        blog = Blog.objects.filter(catagory=cata_id).all()
+        for i in blog:
+            i.catagory = blog_type
+            blog_list.append(i)
+        return render(request, 'blog_body.html', {'blog_list':blog_list})
 
+    def add_blog(self, request):
+        catagory_list = Catagory.objects.all()
+        dic_tag = {'life':1, 'sepro':2, 'study':3, 'skill':4}
+        if request.GET.get('tag') is not None:
+            blog_obj = request.GET
+            tag_id = dic_tag[blog_obj.get('tag')]
+            cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
+            b = Blog(title= blog_obj.get('title'),
+                     author='tangxuelin',
+                     content=blog_obj.get('blog'),
+                     created=datetime.datetime.now(),
+                     catagory_id=cata_id.id,
+                     tag_id=int(tag_id))
+            b.save()
+        return render(request,'text_edit.html', {'cata_list': catagory_list})
 
-def add_blog(request):
-    catagory_list = Catagory.objects.all()
-    dic_tag = {'life':1, 'sepro':2, 'study':3, 'skill':4}
-    if request.GET.get('tag') is not None:
-        blog_obj = request.GET
-        tag_id = dic_tag[blog_obj.get('tag')]
-        cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
-        print cata_id.id, type(cata_id)
-        b = Blog(title= blog_obj.get('title'),
-                 author='tangxuelin',
-                 content=blog_obj.get('blog'),
-                 created=datetime.datetime.now(),
-                 catagory_id=cata_id.id,
-                 tag_id=int(tag_id))
-        b.save()
-    return render(request,'text_edit.html', {'cata_list': catagory_list})
-
-def get_blog(request):
-    blog_id = request.GET.get('id')
-    blog_info = Blog.objects.get(id=blog_id)
-    return render(request, 'blog_info.html', {'blog':blog_info})
+    def get_blog(self, request):
+        blog_id = request.GET.get('id')
+        blog_info = Blog.objects.get(id=blog_id)
+        blog_info.chick += 1
+        blog_info.save()
+        return render(request, 'blog_info.html', {'blog':blog_info})
