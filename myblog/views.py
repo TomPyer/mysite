@@ -47,7 +47,12 @@ class view_cla(object):
 
     def get_blog_list(self, request):
         blog_list = []
-        cata_id = request.GET.get('catagoryid')
+        cata_id = 0
+        if request.GET.get('catagoryname') is not None:
+            c_name = request.GET.get('catagoryname')
+            cata_id = Catagory.objects.get(name=c_name).id
+        elif request.GET.get('catagoryid') is not None:
+            cata_id = request.GET.get('catagoryid')
         blog_type = Catagory.objects.get(id=cata_id)
         blog = Blog.objects.filter(catagory=cata_id).all()
         for i in blog:

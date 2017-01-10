@@ -14,7 +14,7 @@
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Category ranking</li>
                 {% for cata in cata_list %}
-                    <a href="#"><li class="listItem textCenter a">{{ cata.name }}({{ cata.count }})</li></a>
+                    <a href="/blog/python/?catagoryname={{ cata.name }}"><li class="listItem textCenter a">{{ cata.name }}({{ cata.count }})</li></a>
                 {% endfor %}
 			</ul>
 		</div>
@@ -22,7 +22,7 @@
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Recent update</li>
 				{% for rece in recent_list %}
-                    <a href="#"><li class="listItem textCenter a">{{ rece.title }}</li></a>
+                    <a href="/blog/get_blog/?id={{ rece.id }}"><li class="listItem textCenter a">{{ rece.title }}</li></a>
                 {% endfor %}
 			</ul>
 		</div>
@@ -30,7 +30,7 @@
 			<ul class="list-unstyled">
 				<li class="listTitle textCenter">Hot articles</li>
 				{% for hot in hot_list %}
-                    <a href="#"><li class="listItem textCenter a">{{ hot.title }}</li></a>
+                    <a href="/blog/get_blog/?id={{ hot.id }}"><li class="listItem textCenter a">{{ hot.title }}</li></a>
                 {% endfor %}
 			</ul>
 		</div>
@@ -43,4 +43,5 @@
 		</div>
 		<div class="clearfloat"></div>
 	</div>
+
 {% endblock %}

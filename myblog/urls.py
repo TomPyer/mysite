@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^python/', view_obj.get_blog_list),
     url(r'^static/(?P<path>.*)$', serve,{ 'document_root': settings.STATIC_URL }),
     url(r'^add_blog/$', view_obj.add_blog),
-    url(r'^get_blog/$', view_obj.get_blog)
+    url(r'^get_blog/$', view_obj.get_blog),
+    # url(r'^search_blog/$', view_obj.search_blog)
 ]
