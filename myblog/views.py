@@ -8,6 +8,7 @@ from django.http import Http404
 from myblog.models import Blog, Catagory
 
 import datetime
+import jieba
 
 
 class view_cla(object):
@@ -82,3 +83,10 @@ class view_cla(object):
         blog_info.chick += 1
         blog_info.save()
         return render(request, 'blog_info.html', {'blog':blog_info})
+
+    def search_blog(self, request):
+        sel_key = request.GET.get('sel_key')
+        print sel_key
+        sel_list = jieba.cut(sel_key)
+        print sel_list
+        # Blog.objects.get(title__search=sel_key)
