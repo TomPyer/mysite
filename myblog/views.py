@@ -9,6 +9,7 @@ from myblog.models import Blog, Catagory
 
 import datetime
 import jieba
+import urllib
 
 
 class view_cla(object):
@@ -85,8 +86,32 @@ class view_cla(object):
         return render(request, 'blog_info.html', {'blog':blog_info})
 
     def search_blog(self, request):
-        sel_key = request.GET.get('sel_key')
-        print sel_key
-        sel_list = jieba.cut(sel_key)
-        print sel_list
-        # Blog.objects.get(title__search=sel_key)
+        select_title_value = []
+        select_body_value = []
+        select_author_value = []
+        x = request.GET.get('select_key')
+        blog_list = Blog.objects.all()
+        for i in blog_list:
+            if x in i.title:
+                select_title_value.append(i)
+                continue
+            if x in i.content:
+                select_body_value.append(i)
+                continue
+            if x in i.author:
+                select_author_value.append(i)
+
+        select_title_total = len(select_title_value)
+        select_body_total = len(select_body_value)
+        select_author_total = len(select_author_value)
+        select_all_value = select_title_value + select_body_value + select_author_value
+        select_all_total = select_title_total + select_body_total + select_author_total
+        select_all_status = 'error' if len(select_all_value) == 0 else 'success'
+        return render(request, 'search.html', {"select_all":select_all_value,
+                                               "select_status":select_all_status,
+                                               "select_total": select_all_total,
+                                               "title_total": select_title_total,
+                                               "body_total": select_body_total,
+                                               "author_total":select_author_total,
+                                               "select_key": x,
+                                               })

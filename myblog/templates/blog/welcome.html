@@ -31,7 +31,7 @@
     <style type="text/css">
     *{margin:0;padding:0;font-size:14px;}
     .dh{
-      position: absolute;
+      position: fixed;
       top: 500px;
       right:50px;
       z-index:999;
@@ -192,11 +192,11 @@
                 </ul>
             </div>
             <div>
-                <form class="navbar-form navbar-right" role="search">
+                <form class="navbar-form navbar-right" role="search" action="/blog/search_blog/" method="GET">
                     <div class="form-group">
-                        <input  id="select_key" type="text" class="form-control" placeholder="请输入文章标题关键字">
+                        <input  id="select_key" name='select_key' type="text" class="form-control" placeholder="请输入文章标题关键字">
                     </div>
-                    <button type="submit" class="btn btn-default" onclick="select_blog()"><b>搜索</b></button>
+                    <button type="submit" class="btn btn-default"><b>搜索</b></button>
                 </form>
             </div>
         </div>
@@ -213,7 +213,9 @@
     {% endblock %}
     {% block blog_info %}
     {% endblock %}
-    <div class="dh">
+    {% block select_info %}
+    {% endblock %}
+    <div class="dh .navbar-fixed-bottom">
         <ul style="list-style: none;">
             <li ><a href="/admin"><b>管理登录</b></a></li>
             <li ><a href="/blog/add_blog"><b>博文编辑</b></a></li>
@@ -222,8 +224,6 @@
             <li ><a href="/blog/index"><b>返回首页</b></a></li>
         </ul>
     </div>
-
-    <div class="footer bg1"></div>
 
 </body>
 <script>
