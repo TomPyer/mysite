@@ -65,18 +65,35 @@ class view_cla(object):
     def add_blog(self, request):
         catagory_list = Catagory.objects.all()
         dic_tag = {'life':1, 'sepro':2, 'study':3, 'skill':4}
-        if request.GET.get('tag') is not None:
-            blog_obj = request.GET
-            tag_id = dic_tag[blog_obj.get('tag')]
-            cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
-            b = Blog(title= blog_obj.get('title'),
+        if request.method == "GET":
+            if request.GET.get('tag') is not None:
+                blog_obj = request.GET
+                print blog_obj.get('blog')
+                tag_id = dic_tag[blog_obj.get('tag')]
+                cata_id = Catagory.objects.get(name=blog_obj.get('catagory'))
+                b = Blog(title= blog_obj.get('title'),
+                         author='tangxuelin',
+                         content=blog_obj.get('blog'),
+                         created=datetime.datetime.now(),
+                         catagory_id=cata_id.id,
+                         tag_id=int(tag_id))
+                b.save()
+        elif request.POST:
+            print request.POST['title']
+            print request.POST['catagory']
+            print request.POST['tags']
+            print request.POST['content']
+            tag_id = dic_tag[request.POST['tags']]
+            cata_id = Catagory.objects.get(name=request.POST['catagory'])
+            b = Blog(title= request.POST['title'],
                      author='tangxuelin',
-                     content=blog_obj.get('blog'),
+                     content=request.POST['content'],
                      created=datetime.datetime.now(),
                      catagory_id=cata_id.id,
                      tag_id=int(tag_id))
             b.save()
-        return render(request,'text_edit.html', {'cata_list': catagory_list})
+
+        return render(request,'text_edit_2.html', {'cata_list': catagory_list})
 
     def get_blog(self, request):
         blog_id = request.GET.get('id')
